@@ -5,6 +5,10 @@ const props= defineProps({
     contacts:{type:Array}
 })
 
+const emit = defineEmits(['onDelete']);
+const onDelete =(id) => {
+    emit("onDelete", id)
+}
 </script>
 
 <template>
@@ -24,7 +28,7 @@ const props= defineProps({
             </tr>
         </thead>
         <tbody>
-            <contact v-for="contact in contacts" :key="contact.id" :contact="contact"></contact>
+            <contact v-for="contact in contacts" :key="contact.id" :contact="contact" @onDelete="onDelete"></contact>
         </tbody>
     </table>
 
