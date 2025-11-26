@@ -1,6 +1,10 @@
 <script setup>
 import Contact from './ui/Contact.vue';
 
+const props= defineProps({
+    contacts:{type:Array}
+})
+
 </script>
 
 <template>
@@ -20,7 +24,7 @@ import Contact from './ui/Contact.vue';
             </tr>
         </thead>
         <tbody>
-            <contact></contact>
+            <contact v-for="contact in contacts" :key="contact.id" :contact="contact"></contact>
         </tbody>
     </table>
 

@@ -2,6 +2,21 @@
 import ContacListHeader from './ui/ContacListHeader.vue';
 import SearchBar from './ui/SearchBar.vue';
 import TableList from './ui/table-list/TableList.vue';
+import DB from '@/DB';
+
+import {onMounted, reactive} from 'vue';
+
+const props = defineProps({
+    apiURL:{type:String, required:true}
+});
+const contacts=reactive([]);
+
+onMounted(async() =>{
+    DB.setApiURL(props.apiURL);
+    contacts.splice(contacts.length,0,...await(DB.findAll()));
+    console.table(contacts);
+})
+
 
 </script>
 
@@ -14,7 +29,7 @@ import TableList from './ui/table-list/TableList.vue';
         
     <search-bar></search-bar>
 
-    <table-list></table-list>
+    <table-list :contacts="contacts"></table-list>
 </section>
 
 </template>
