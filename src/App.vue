@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+import AddForm from './components/addform/AddForm.vue';
+import AppFooter from './components/AppFooter.vue';
+import ContactList from './components/contact-list/ContactList.vue';
+
+</script>
 
 <template>
-  <h1 class="text-4xl">You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <add-form></add-form>
+
+  <contact-list></contact-list>
+
+  <app-footer></app-footer>
 </template>
 
 <style scoped></style>
