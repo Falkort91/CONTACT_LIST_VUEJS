@@ -4,10 +4,11 @@ import SearchBar from './ui/SearchBar.vue';
 import TableList from './ui/table-list/TableList.vue';
 import DB from '@/DB';
 
-import {onMounted, reactive} from 'vue';
+import {onMounted, reactive, watch} from 'vue';
 
 const props = defineProps({
-    apiURL:{type:String, required:true}
+    apiURL:{type:String, required:true},
+    formData:{type:Object}
 });
 const contacts=reactive([]);
 
@@ -26,6 +27,15 @@ const deleteContact = async (id) => {
         contacts.splice(index,1);
     }
 }
+
+const addContact = async() =>{
+    const response = await DB.create(props.formData.firstname,props.formData.lastname,props.formData.email);
+    contacts.splice(contacts.length,0,response);
+    console.log(props.formData);
+    
+};
+watch(() => props.formData, addContact, { deep: true })
+
 </script>
 
 <template>
