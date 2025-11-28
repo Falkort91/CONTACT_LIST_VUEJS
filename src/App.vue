@@ -13,11 +13,17 @@ const addContact = (data) => {
 </script>
 
 <template>
-  <add-form @add-contact="addContact"></add-form>
+  <add-form @add-contact="addContact">
 
-  <contact-list apiURL="https://691b19752d8d785575717f93.mockapi.io/" :formData="formData"></contact-list>
+  </add-form>
 
-  <app-footer></app-footer>
+  <contact-list apiURL="https://691b19752d8d785575717f93.mockapi.io/" 
+                :formData="formData">
+  </contact-list>
+
+  <app-footer>
+    
+  </app-footer>
 </template>
 
 <style scoped></style>

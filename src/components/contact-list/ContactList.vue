@@ -11,6 +11,7 @@ const props = defineProps({
     formData:{type:Object}
 });
 const contacts=ref([]);
+const filteredContacts=ref([]);
 
 onMounted(async() =>{
     DB.setApiURL(props.apiURL);
@@ -42,7 +43,18 @@ const getContactCount = computed(()=>{
     return contacts.value.length
 })
 
+const searchingContact=(searchValue) =>{
+    filteredContacts.value= contacts.value.filter(contact => 
+        contact.firstname.toLowerCase().includes(searchValue)||
+        contact.lastname.toLowerCase().includes(searchValue)||
+        contact.email.toLowerCase().includes(searchValue));
+}
+
 watch(() => props.formData, addContact, { deep: true })
+watch(contacts, () => {
+    filteredContacts.value = contacts.value;
+},{ deep: true }
+);
 
 
 </script>
@@ -51,11 +63,19 @@ watch(() => props.formData, addContact, { deep: true })
 
 <!-- Section droite pour la liste des contacts -->
 <section class="w-2/3 p-6">       
-    <contac-list-header :contactCount="getContactCount"></contac-list-header>
-        
-    <search-bar></search-bar>
+    <contac-list-header :contactCount="getContactCount">
 
-    <table-list :contacts="contacts" @onDelete="deleteContact" @onUpdate="updateContact"></table-list>
+    </contac-list-header>
+        
+    <search-bar @onSearch="searchingContact">
+
+    </search-bar>
+
+    <table-list :filteredContacts="filteredContacts" 
+                :contacts="contacts" 
+                @onDelete="deleteContact" 
+                @onUpdate="updateContact">
+    </table-list>
 </section>
 
 </template>
