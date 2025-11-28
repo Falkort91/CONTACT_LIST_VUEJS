@@ -7,7 +7,7 @@
 .contacts-table tr:not(.isEditing) .isEditing-visible {
   display: none;
 }
-.contacts-table tr:not(.isEditing) .isEditing_hidden {
+.contacts-table tr:not(.isEditing) .isEditing-hidden {
   display: block;
 }
 .contacts-table tr.isEditing .isEditing-visible {

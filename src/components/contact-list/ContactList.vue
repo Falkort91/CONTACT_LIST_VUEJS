@@ -36,6 +36,11 @@ const addContact = async() =>{
 };
 watch(() => props.formData, addContact, { deep: true })
 
+
+const updateContact = async(editedContact) => {
+    const response = await DB.updateOne(editedContact);
+}
+
 </script>
 
 <template>
@@ -46,7 +51,7 @@ watch(() => props.formData, addContact, { deep: true })
         
     <search-bar></search-bar>
 
-    <table-list :contacts="contacts" @onDelete="deleteContact"></table-list>
+    <table-list :contacts="contacts" @onDelete="deleteContact" @onUpdate="updateContact"></table-list>
 </section>
 
 </template>
