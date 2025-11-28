@@ -12,15 +12,12 @@ const emailValue=ref('');
 
 const getFirstname = (firstname) => {
   firstnameValue.value = firstname;
-  console.log("get firstname: "+firstname);
 };
 const getLastname = (lastname) => {
   lastnameValue.value = lastname;
-  console.log('get lastname : '+lastname)
 }
 const getEmail = (email) => {
   emailValue.value = email;
-  console.log('get email : '+email)
 }
 
 const emits =defineEmits(['addContact']);

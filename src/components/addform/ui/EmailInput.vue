@@ -5,7 +5,6 @@ const email = ref('');
 const emits = defineEmits(['email']);
 const getEmail = () => {
   emits('email', email.value);
-  console.log("emit du email : "+email.value);
 }
 
 </script>

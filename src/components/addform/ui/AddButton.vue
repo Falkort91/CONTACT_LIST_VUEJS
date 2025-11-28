@@ -8,7 +8,6 @@ const props = defineProps({
 const emit = defineEmits(['addContact']);
 const addContact=()=>{
   emit('addContact', {firstname:props.firstname, lastname:props.lastname, email:props.email})
-  console.log("emit du bouton add : " +props.firstname+" "+props.lastname+" email: "+props.email);
 }
 </script>
 

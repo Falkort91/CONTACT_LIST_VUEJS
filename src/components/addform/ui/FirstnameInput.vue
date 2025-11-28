@@ -5,8 +5,6 @@ const firstname=ref("");
 const emit = defineEmits(['firstname']);
 const onInput=()=>{
   emit('firstname', firstname.value)
-  console.log('emit du firstname: ' + firstname.value);
-  
 }
 </script>
 

@@ -4,12 +4,12 @@ import AppFooter from './components/AppFooter.vue';
 import ContactList from './components/contact-list/ContactList.vue';
 import {reactive} from 'vue';
 
-const formData =reactive({});
+const formData = reactive({});
 
 const addContact = (data) => {
  Object.assign(formData,data);
- console.log(formData);
 }
+
 </script>
 
 <template>

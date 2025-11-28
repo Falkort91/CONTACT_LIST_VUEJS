@@ -4,42 +4,46 @@ import SearchBar from './ui/SearchBar.vue';
 import TableList from './ui/table-list/TableList.vue';
 import DB from '@/DB';
 
-import {onMounted, reactive, watch} from 'vue';
+import {onMounted, computed, watch, ref} from 'vue';
 
 const props = defineProps({
     apiURL:{type:String, required:true},
     formData:{type:Object}
 });
-const contacts=reactive([]);
+const contacts=ref([]);
 
 onMounted(async() =>{
     DB.setApiURL(props.apiURL);
-    contacts.splice(contacts.length,0,...await(DB.findAll()));
+    contacts.value.splice(contacts.value.length,0,...await(DB.findAll()));
+    
 })
 
 const emit = defineEmits(['onDelete']);
 const deleteContact = async (id) => {
    await DB.deleteOneById(id);
-    const index = contacts.findIndex( (contact) => 
+    const index = contacts.value.findIndex( (contact) => 
         contact.id === id
     );
     if( index!=-1){
-        contacts.splice(index,1);
+        contacts.value.splice(index,1);
     }
 }
 
 const addContact = async() =>{
     const response = await DB.create(props.formData.firstname,props.formData.lastname,props.formData.email);
-    contacts.splice(contacts.length,0,response);
-    console.log(props.formData);
-    
+    contacts.value.splice(contacts.value.length,0,response);    
 };
-watch(() => props.formData, addContact, { deep: true })
-
 
 const updateContact = async(editedContact) => {
     const response = await DB.updateOne(editedContact);
-}
+};
+
+const getContactCount = computed(()=>{
+    return contacts.value.length
+})
+
+watch(() => props.formData, addContact, { deep: true })
+
 
 </script>
 
@@ -47,7 +51,7 @@ const updateContact = async(editedContact) => {
 
 <!-- Section droite pour la liste des contacts -->
 <section class="w-2/3 p-6">       
-    <contac-list-header></contac-list-header>
+    <contac-list-header :contactCount="getContactCount"></contac-list-header>
         
     <search-bar></search-bar>
 
