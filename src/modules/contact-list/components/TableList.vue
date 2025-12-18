@@ -1,5 +1,5 @@
 <script setup>
-import Contact from './ui/Contact.vue';
+import Contact from './Contact.vue';
 
 const props= defineProps({
     contacts:{type:Array},

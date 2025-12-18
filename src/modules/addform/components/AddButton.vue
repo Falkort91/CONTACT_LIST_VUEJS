@@ -1,13 +1,8 @@
 <script setup>
-const props = defineProps({
-  firstname :{type:String},
-  lastname :{type:String},
-  email :{type:String}
-})
-
 const emit = defineEmits(['addContact']);
 const addContact=()=>{
-  emit('addContact', {firstname:props.firstname, lastname:props.lastname, email:props.email})
+  emit('addContact');
+  console.log("Bouton add");
 }
 </script>
 

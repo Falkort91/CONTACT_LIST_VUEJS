@@ -1,21 +1,21 @@
 export default class DB{
   //2. Recupération de l'url via le data
-  static setApiURL(data){
-    this.apiURL = data;
+  static setApiURL(url){
+    this.apiURL = url;
   }
   static async findAll(){
     //3. on peut utiliser apiURL grâce à setApiURL
     const response = await fetch(this.apiURL + "contacts");
     return response.json();
   }
-  static async create (formFirstname,formLastname, formemail){
+  static async create (formData){
     const response = await fetch(this.apiURL + "contacts",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({
-        firstname: formFirstname,
-        lastname: formLastname,
-        email: formemail
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        email: formData.email
       })
     });
     return response.json();

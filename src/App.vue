@@ -1,14 +1,18 @@
 <script setup>
-import AddForm from './components/addform/AddForm.vue';
-import AppFooter from './components/AppFooter.vue';
-import ContactList from './components/contact-list/ContactList.vue';
-import {reactive} from 'vue';
+import AddForm from './modules/addform/AddForm.vue';
+import AppFooter from './layout/AppFooter.vue';
+import ContactList from './modules/contact-list/ContactList.vue';
+import {reactive,onMounted} from 'vue';
+import { store } from './stores/contacts';
 
 const formData = reactive({});
-
 const addContact = (data) => {
  Object.assign(formData,data);
 }
+
+onMounted(async () => {
+   await store.init("https://68dd1ef87cd1948060ac7fc2.mockapi.io/")
+});
 
 </script>
 
@@ -17,8 +21,7 @@ const addContact = (data) => {
 
   </add-form>
 
-  <contact-list apiURL="https://691b19752d8d785575717f93.mockapi.io/" 
-                :formData="formData">
+  <contact-list :formData="formData">
   </contact-list>
 
   <app-footer>

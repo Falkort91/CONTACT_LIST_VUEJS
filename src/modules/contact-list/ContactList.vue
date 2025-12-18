@@ -1,20 +1,20 @@
 <script setup>
-import ContacListHeader from './ui/ContacListHeader.vue';
-import SearchBar from './ui/SearchBar.vue';
-import TableList from './ui/table-list/TableList.vue';
-import DB from '@/DB';
+import ContacListHeader from './components/ContacListHeader.vue';
+import SearchBar from './components/SearchBar.vue';
+import TableList from './components/TableList.vue';
+import DB from '@/services/DB';
 
 import {onMounted, computed, watch, ref} from 'vue';
 
 const props = defineProps({
-    apiURL:{type:String, required:true},
+    apiURL:{type:String},
     formData:{type:Object}
 });
 const contacts=ref([]);
 const filteredContacts=ref([]);
 
 onMounted(async() =>{
-    DB.setApiURL(props.apiURL);
+    DB.setApiURL("https://68dd1ef87cd1948060ac7fc2.mockapi.io/");
     contacts.value.splice(contacts.value.length,0,...await(DB.findAll()));
     
 })
