@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue';
-const searchValue=ref('');
+const props = defineProps({
+    modelValue:{type:String}
+})
 
-const emits = defineEmits(['onSearch']);
 
-const onSearch =() =>{
-    emits('onSearch', searchValue.value)
+const emits = defineEmits(['update:modelValue']);
+
+const onSearch =(e) =>{
+    emits('update:modelValue', e.target.value)
 }
 </script>
 
@@ -17,7 +19,6 @@ const onSearch =() =>{
         type="text"
         class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         placeholder="Search a contact"
-        v-model="searchValue"
         @input="onSearch"
         />
     </div>

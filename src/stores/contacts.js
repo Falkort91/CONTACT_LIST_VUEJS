@@ -1,7 +1,8 @@
 import {ref,reactive,computed} from 'vue';
 import DB from '../services/DB';
 
-const edit =ref('');
+const edit =ref(null);
+const searchValue=ref('');
 
 const formData=reactive({
     firstname:"",
@@ -10,6 +11,7 @@ const formData=reactive({
 })
 
 const contacts=reactive([]);
+
 
 const isCompleted = computed(() => {
     if(formData.firstname && formData.lastname && formData.email){
@@ -22,6 +24,16 @@ const isCompleted = computed(() => {
 const contactCount = computed(()=>{
     return contacts.length
 }) 
+
+const filteredContacts = computed (()=>{
+    if(!searchValue.value){
+        return contacts;
+    }
+    return contacts.filter(contact => 
+            contact.firstname.toLowerCase().includes(searchValue.value)||
+            contact.lastname.toLowerCase().includes(searchValue.value)||
+            contact.email.toLowerCase().includes(searchValue.value));
+});
 
 const resetInputs = () =>{
     formData.firstname="";
@@ -70,9 +82,6 @@ const deleteContact = async (id) => {
     }
 }
 
-
-
-
 export const store = reactive({
     contacts,
     init,
@@ -82,6 +91,8 @@ export const store = reactive({
     deleteContact,
     editing,
     edit,
-    contactCount
+    contactCount,
+    searchValue,
+    filteredContacts
 
 });

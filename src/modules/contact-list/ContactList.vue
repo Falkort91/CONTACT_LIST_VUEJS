@@ -4,24 +4,6 @@ import SearchBar from './components/SearchBar.vue';
 import TableList from './components/TableList.vue';
 import { store } from '@/stores/contacts';
 
-/* const filteredContacts=ref([]); */
-
-
-
-/* const searchingContact=(searchValue) =>{
-    filteredContacts.value= contacts.value.filter(contact => 
-        contact.firstname.toLowerCase().includes(searchValue)||
-        contact.lastname.toLowerCase().includes(searchValue)||
-        contact.email.toLowerCase().includes(searchValue));
-} */
-
-/* watch(() => props.formData, addContact, { deep: true })
-watch(contacts, () => {
-    filteredContacts.value = contacts.value;
-},{ deep: true }
-); */
-
-
 </script>
 
 <template>
@@ -32,12 +14,11 @@ watch(contacts, () => {
 
     </contac-list-header>
         
-    <search-bar @onSearch="searchingContact">
+    <search-bar v-model="store.searchValue">
 
     </search-bar>
 
-    <table-list :filteredContacts="filteredContacts" 
-                :contacts="store.contacts" 
+    <table-list :filteredContacts="store.filteredContacts"  
                 @onDelete="store.deleteContact" 
                 @onUpdate="store.updateContact"
                 @onEditing="store.editing"
