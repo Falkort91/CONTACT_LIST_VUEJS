@@ -3,15 +3,20 @@ import Contact from './Contact.vue';
 
 const props= defineProps({
     contacts:{type:Array},
-    filteredContacts:{type:Array}
+    filteredContacts:{type:Array},
+    editingId:{type:Number}
 })
 
-const emit = defineEmits(['onDelete','onUpdate']);
+const emit = defineEmits(['onDelete','onUpdate','onEditing']);
 const onDelete =(id) => {
     emit("onDelete", id)
 }
 const onUpdate = (editedContact) => {
     emit("onUpdate", editedContact);
+} 
+const onEditing = (id) =>{
+    emit('onEditing',id)
+    console.log("EDITING TABLELIST")
 }
 
 </script>
@@ -33,7 +38,14 @@ const onUpdate = (editedContact) => {
             </tr>
         </thead>
         <tbody>
-            <contact v-for="contact in filteredContacts" :key="contact.id" :contact="contact" @onDelete="onDelete" @onUpdate="onUpdate"></contact>
+            <contact v-for="contact in props.contacts" 
+                    :key="contact.id" 
+                    :contact="contact"
+                    @onDelete="onDelete" 
+                    @onUpdate="onUpdate"
+                    @onEditing="onEditing"
+                    :isEditing="props.editingId === contact.id">
+            </contact>
         </tbody>
     </table>
 

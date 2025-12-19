@@ -1,33 +1,31 @@
 <script setup>
-import { reactive, ref } from 'vue';
-
-const edit =ref('');
+import { reactive } from 'vue';
 
 const props=defineProps({
-    contact:{type:Object}
+    contact:{type:Object},
+    classEdit:{type:String},
+    isEditing:{type:Boolean}
 })
-const editedContact=reactive(props.contact);
 
-const emit=defineEmits(['onDelete','onUpdate']);
+const editedContact=reactive({...props.contact});
+
+const emit=defineEmits(['onDelete','onUpdate','onEditing']);
 const onDelete = () =>{
     emit('onDelete',props.contact.id)
 }
-
-const editing=()=>{
-    edit.value = "isEditing";
-    console.log(editedContact);
-}
-
 const onUpdate = () => {
     emit('onUpdate', editedContact);
-    edit.value="";
+} 
+const onEditing = () =>{
+    emit('onEditing',props.contact.id);
+    console.log("EDITING CONTACT")
 }
 
 </script>
 
 <template>
 
-    <tr class="contact-row" :class="edit">
+    <tr class="contact-row" :class="isEditing? 'isEditing' : ''">
         <td class="p-4">
             <span class="isEditing-hidden">{{editedContact.firstname}}</span>
             <input
@@ -59,7 +57,7 @@ const onUpdate = () => {
                     <i class="fa-solid fa-check"></i>
                 </button>
                 <button class="btn-edit isEditing-hidden bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-md"
-                        @click="editing">
+                        @click="onEditing">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button class="btn-delete isEditing-hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"

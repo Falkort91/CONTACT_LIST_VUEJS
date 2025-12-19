@@ -14,7 +14,6 @@ import AddButton from './components/AddButton.vue';
           placeholder="John"
           v-model="store.formData.firstname"
           >
-          <!-- @update:model-value="store.firstnameValue" -->
           Firstname
         </my-input>
 

@@ -4,6 +4,7 @@ const addContact=()=>{
   emit('addContact');
   console.log("Bouton add");
 }
+
 </script>
 
 
@@ -13,7 +14,6 @@ const addContact=()=>{
         @click="addContact">
           Add
         </button>
-
 </template>
 
 <style scoped>
