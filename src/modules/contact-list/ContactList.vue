@@ -6,9 +6,7 @@ import { store } from '@/stores/contacts';
 
 /* const filteredContacts=ref([]); */
 
-/* const getContactCount = computed(()=>{
-    return contacts.value.length
-}) */
+
 
 /* const searchingContact=(searchValue) =>{
     filteredContacts.value= contacts.value.filter(contact => 
@@ -30,7 +28,7 @@ watch(contacts, () => {
 
 <!-- Section droite pour la liste des contacts -->
 <section class="w-2/3 p-6">       
-    <contac-list-header :contactCount="getContactCount">
+    <contac-list-header :contactCount="store.contactCount">
 
     </contac-list-header>
         

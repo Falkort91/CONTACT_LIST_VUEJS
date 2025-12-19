@@ -19,6 +19,10 @@ const isCompleted = computed(() => {
     }
 })
 
+const contactCount = computed(()=>{
+    return contacts.length
+}) 
+
 const resetInputs = () =>{
     formData.firstname="";
     formData.lastname="";
@@ -77,6 +81,7 @@ export const store = reactive({
     updateContact,
     deleteContact,
     editing,
-    edit
+    edit,
+    contactCount
 
 });
