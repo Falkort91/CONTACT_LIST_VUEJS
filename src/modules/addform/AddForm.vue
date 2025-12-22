@@ -1,6 +1,6 @@
 <script setup>
 import { store } from '@/stores/contacts';
-import MyInput from '@/components/ui/MyInput.vue';
+import FormInput from '@/components/ui/FormInput.vue';
 import AddButton from './components/AddButton.vue';
 
 </script>
@@ -10,27 +10,27 @@ import AddButton from './components/AddButton.vue';
       <aside class="w-1/3 bg-gray-200 p-6 pb-12">
         <h2 class="text-xl font-bold mb-4">Add a Contact</h2>
 
-        <my-input 
+        <form-input 
           placeholder="John"
           v-model="store.formData.firstname"
           >
           Firstname
-        </my-input>
+        </form-input>
 
-        <my-input
+        <form-input
           placeholder="Doe"
           v-model="store.formData.lastname"
           >
           Lastname
-        </my-input>
+        </form-input>
 
-        <my-input 
+        <form-input 
           type="email" 
           placeholder="johndoe@mail.com"
           v-model="store.formData.email"
           >
           Email
-        </my-input>
+        </form-input>
 
         <add-button @add-contact="store.createContact"></add-button>
       </aside>

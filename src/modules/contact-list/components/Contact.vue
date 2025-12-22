@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
+import ContactButton from '@/components/ui/ContactButton.vue';
 
 const props=defineProps({
     contact:{type:Object},
@@ -52,18 +53,15 @@ const onEditing = () =>{
         </td>
         <td class="p-4">
             <div class="flex justify-end space-x-2">
-                <button class="btn-check isEditing-visible bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-md"
-                        @click="onUpdate">
-                    <i class="fa-solid fa-check"></i>
-                </button>
-                <button class="btn-edit isEditing-hidden bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-md"
-                        @click="onEditing">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button class="btn-delete isEditing-hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
-                        @click="onDelete">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
+                <contact-button class="btn-check isEditing-visible bg-green-400 hover:bg-green-500"
+                            @click="onUpdate"
+                ><i class="fa-solid fa-check"></i></contact-button>
+                <contact-button class="btn-edit isEditing-hidden bg-yellow-400 hover:bg-yellow-500"
+                            @click="onEditing"
+                ><i class="fa-solid fa-pen-to-square"></i></contact-button>
+                <contact-button class="btn-delete isEditing-hidden bg-red-500 hover:bg-red-700"
+                            @click="onDelete"
+                ><i class="fa-solid fa-trash"></i></contact-button>
             </div>
         </td>
     </tr>
