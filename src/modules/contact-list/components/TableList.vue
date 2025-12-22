@@ -6,7 +6,7 @@ const props= defineProps({
     editingId:{type:Number}
 })
 
-const emit = defineEmits(['onDelete','onUpdate','onEditing']);
+const emit = defineEmits(['onDelete','onUpdate','onEditing',"onSort"]);
 const onDelete =(id) => {
     emit("onDelete", id)
 }
@@ -16,6 +16,9 @@ const onUpdate = (editedContact) => {
 const onEditing = (id) =>{
     emit('onEditing',id)
     console.log("EDITING TABLELIST")
+}
+const onSort =(e) => {
+    emit('onSort', e.currentTarget.textContent);
 }
 
 </script>
@@ -27,11 +30,13 @@ const onEditing = (id) =>{
         <thead>
             <tr class="bg-gray-200">
               <th class="text-left p-4 rounded-tl-lg">
-                    <a href="#">Firstname</a>
+                    <a href="#" @click.prevent="onSort">Firstname</a>
               </th>
-              <th class="text-left p-4"><a href="#">Lastname</a></th>
               <th class="text-left p-4">
-                    <a href="#">Email</a>
+                    <a href="#" @click.prevent="onSort">Lastname</a>
+                </th>
+              <th class="text-left p-4">
+                    <a href="#" @click.prevent="onSort">Email</a>
               </th>
               <th class="text-right p-4 rounded-tr-lg">Actions</th>
             </tr>

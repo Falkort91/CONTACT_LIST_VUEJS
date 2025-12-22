@@ -22,7 +22,8 @@ import { store } from '@/stores/contacts';
                 @onDelete="store.deleteContact" 
                 @onUpdate="store.updateContact"
                 @onEditing="store.editing"
-                :editingId="store.edit">
+                :editingId="store.edit"
+                @on-sort="store.toggleSort">
     </table-list>
 </section>
 

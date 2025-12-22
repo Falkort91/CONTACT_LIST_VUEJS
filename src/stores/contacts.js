@@ -4,6 +4,11 @@ import DB from '../services/DB';
 const edit =ref(null);
 const searchValue=ref('');
 
+const sortSettings =reactive({
+    key:null,
+    isAsc: true
+});
+
 const formData=reactive({
     firstname:"",
     lastname:"",
@@ -26,14 +31,38 @@ const contactCount = computed(()=>{
 }) 
 
 const filteredContacts = computed (()=>{
-    if(!searchValue.value){
-        return contacts;
+    let contactsFiltered = contacts;
+    if(searchValue.value){
+        const filter = searchValue.value.toLowerCase();
+        contactsFiltered=contactsFiltered.filter(contact => 
+            contact.firstname.toLowerCase().includes(filter)||
+            contact.lastname.toLowerCase().includes(filter)||
+            contact.email.toLowerCase().includes(filter));
     }
-    return contacts.filter(contact => 
-            contact.firstname.toLowerCase().includes(searchValue.value)||
-            contact.lastname.toLowerCase().includes(searchValue.value)||
-            contact.email.toLowerCase().includes(searchValue.value));
+
+    if(sortSettings.key){
+        contactsFiltered = contactsFiltered.sort((a,b)=>{
+            let valA = a[sortSettings.key].toLowerCase();
+            let valB = b[sortSettings.key].toLowerCase();
+
+            if (valA < valB) return sortSettings.isAsc ? -1 : 1;
+            if (valB < valA) return sortSettings.isAsc ? 1 : -1;
+            return 0;
+        });
+    }
+    return contactsFiltered;
+    
 });
+
+const toggleSort = (key)=>{
+    key=key.toLowerCase();
+    if(sortSettings.key === key){
+        sortSettings.isAsc = !sortSettings.isAsc;
+    }else{
+        sortSettings.key=key;
+        sortSettings.isAsc=true;
+    }
+}
 
 const resetInputs = () =>{
     formData.firstname="";
@@ -93,6 +122,6 @@ export const store = reactive({
     edit,
     contactCount,
     searchValue,
-    filteredContacts
-
+    filteredContacts,
+    toggleSort
 });
